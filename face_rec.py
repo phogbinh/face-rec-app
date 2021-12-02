@@ -1,11 +1,15 @@
 import face_recognition
 
-def get_first_person_name(frame, trained_images_data):
+def get_first_known_person_name(frame, trained_images_data):
   face_encodings = face_recognition.face_encodings(frame,
                                                    face_recognition.face_locations(frame))
   if len(face_encodings) == 0:
     return "none"
-  return get_person_name(face_encodings[0], trained_images_data)
+  for face_encoding in face_encodings:
+    person_name = get_person_name(face_encoding, trained_images_data)
+    if person_name != "unknown":
+      return person_name
+  return "unknowns"
 
 def get_person_name(face_encoding, trained_images_data):
   counts = get_matched_name_counts(face_encoding, trained_images_data)

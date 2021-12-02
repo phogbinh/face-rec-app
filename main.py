@@ -15,7 +15,7 @@ time.sleep(2) # for the worker thread created above to finish its job
 while True:
   frame = video_stream.read()
   frame = imutils.resize(frame, width=FRAME_WIDTH)
-  first_person_name = face_rec.get_first_person_name(frame, trained_images_data)
-  print(first_person_name)
+  first_known_person_name = face_rec.get_first_known_person_name(frame, trained_images_data)
+  print(first_known_person_name)
   cv2.imshow("Debug", frame)
   cv2.waitKey(1) # display frame for >= 1ms
